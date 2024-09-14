@@ -9,5 +9,6 @@ final documentServiceProvider = Provider<DocumentService>((ref) {
 
 // Document Request Service Provider
 final documentRequestServiceProvider = Provider<DocumentRequestService>((ref) {
-  return DocumentRequestService();
+  final documentService = ref.watch(documentServiceProvider);
+  return DocumentRequestService(documentService);
 });
