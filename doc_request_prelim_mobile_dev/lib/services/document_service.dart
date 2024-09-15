@@ -34,7 +34,7 @@ class DocumentService {
     // Display the list of available documents
     print('\nAvailable Documents:');
     for (var document in _documents) {
-      print('ID: ${document.id}, Name: ${document.name}, Price: \$${document.price}');
+      print('ID: ${document.id}, Name: ${document.name}, Price: \Php.${document.price}');
     }
 
     // Prompt for document ID to delete

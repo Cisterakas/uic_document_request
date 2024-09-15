@@ -8,7 +8,7 @@ void main() {
   final documentRequestService = container.read(documentRequestServiceProvider);
 
   while (true) {
-    print('\nDocument Request System');
+    print('\nUIC Document Request System');
     print('1. Manage Document');
     print('2. Request Document');
     print('3. List Requests');
@@ -22,7 +22,7 @@ void main() {
         documentService.manageDocument();
         break;
       case '2':
-        documentRequestService.requestDocument(); // No need to pass studentName here
+        documentRequestService.requestDocument(); 
         break;
       case '3':
         documentRequestService.listRequests();
