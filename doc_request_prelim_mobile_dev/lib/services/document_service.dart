@@ -11,7 +11,8 @@ class DocumentService {
   }) {
     // Check for duplicate document ID
     if (_documents.any((doc) => doc.id == id)) {
-      print('Error: A document with ID "$id" already exists. Please use a unique ID.');
+      print(
+          'Error: A document with ID "$id" already exists. Please use a unique ID.');
       return; // Exit the method if the document ID is not unique
     }
 
@@ -34,7 +35,8 @@ class DocumentService {
     // Display the list of available documents
     print('\nAvailable Documents:');
     for (var document in _documents) {
-      print('ID: ${document.id}, Name: ${document.name}, Price: \Php.${document.price}');
+      print(
+          'ID: ${document.id}, Name: ${document.name}, Price: \Php.${document.price.toStringAsFixed(2)}');
     }
 
     // Prompt for document ID to delete
@@ -62,7 +64,11 @@ class DocumentService {
   Document? getDocumentById(String? documentId) {
     return _documents.firstWhere(
       (doc) => doc.id == documentId,
-      orElse: () => Document(id: '', name: '', price: 0), // Return an empty Document object if the document is not found
+      orElse: () => Document(
+          id: '',
+          name: '',
+          price:
+              0), // Return an empty Document object if the document is not found
     );
   }
 
@@ -94,14 +100,27 @@ class DocumentService {
   void _addDocument() {
     stdout.write('Enter document ID: ');
     String? id = stdin.readLineSync();
+
+    // Check if ID is null or empty
+    if (id == null || id.isEmpty) {
+      print('Error: Document ID cannot be null or empty.');
+      return; // Exit the method if the ID is invalid
+    }
+
     stdout.write('Enter document name: ');
     String? name = stdin.readLineSync();
+
+    // Check if name is null or empty
+    if (name == null || name.isEmpty) {
+      print('Error: Document name cannot be null or empty.');
+      return; // Exit the method if the name is invalid
+    }
 
     double? price;
     while (true) {
       stdout.write('Enter document price: ');
       String? priceInput = stdin.readLineSync();
-      
+
       // Try to parse the input to a double
       if (priceInput != null && double.tryParse(priceInput) != null) {
         price = double.parse(priceInput);
@@ -111,12 +130,12 @@ class DocumentService {
       }
     }
 
-    if (id != null && name != null) {
-      addDocument(
-        id: id,
-        name: name,
-        price: price!, // Using null assertion operator (!) to assert that price is not null
-      );
-    }
+    // Now that we have validated ID, name, and price, we can add the document
+    addDocument(
+      id: id,
+      name: name,
+      price:
+          price!, // Using null assertion operator (!) to assert that price is not null
+    );
   }
 }
